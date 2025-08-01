@@ -1,19 +1,10 @@
-'use strict';
+const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = {
-    routes: [
-                {
-      method: 'GET',
-      path: '/pubs',
-      handler: 'pub.find',
-      config: {}
+module.exports = createCoreRouter('api::pub.pub', {
+    prefix: '',
+    config: {
+        find: {
+            auth: false,
+        },
     },
-        {
-      method: 'GET',
-      path: '/pubs/affordable',
-      handler: 'pub.getAffordablePubs',
-      config: { auth: false },
-    },
-]
-
-};
+});

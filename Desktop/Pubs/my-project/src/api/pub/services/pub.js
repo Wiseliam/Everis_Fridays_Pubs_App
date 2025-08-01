@@ -8,7 +8,7 @@ const { createCoreService } = require('@strapi/strapi').factories;
 
 module.exports = createCoreService('api::pub.pub', ({ strapi }) => ({
 
-async getAffordablePubs(maxPrice = 15) {
+async getAffordablePubs(maxPrice = 15, sortOrder) {
 
     console.log('chiamata a /api/services ricevuta');
 
@@ -18,7 +18,8 @@ async getAffordablePubs(maxPrice = 15) {
     $lte: maxPrice
     }
     },
-    populate: '*'
+    populate: '*',
+    sort: { avgPrice: sortOrder === 'asc' ? 'asc' : 'desc' }
     });
     return pubs;
 }
