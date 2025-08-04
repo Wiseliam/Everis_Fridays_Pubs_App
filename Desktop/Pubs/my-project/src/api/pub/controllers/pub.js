@@ -18,7 +18,8 @@ module.exports = createCoreController('api::pub.pub', ({ strapi }) => ({
 
     async getAffordablePubs(ctx) {
         const maxPrice = ctx.query.maxPrice ? Number(ctx.query.maxPrice) : 15;
-        const pubs = await strapi.service('api::pub.pub').getAffordablePubs(maxPrice);
+        const sortOrder = ctx.query.sort;
+        const pubs = await strapi.service('api::pub.pub').getAffordablePubs(maxPrice, sortOrder);
         return pubs;
     }
         
